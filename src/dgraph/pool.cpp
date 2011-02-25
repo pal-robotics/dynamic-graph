@@ -31,6 +31,7 @@
 #include "dynamic-graph/pool.h"
 #include "dynamic-graph/debug.h"
 #include "dynamic-graph/entity.h"
+#include <boost/algorithm/string/regex.hpp>
 
 using namespace dynamicgraph;
 
@@ -202,8 +203,13 @@ writeGraph(const std::string &aFileName)
        iter!=entityMap.end (); ++iter)
     {
       Entity* ent = iter->second;
-      GraphFile << ent->getName ()
-		<<" [ label = \"" << ent->getName () << "\" ," << std::endl
+      const std::string ent_name = ent->getName ();
+      const boost::regex e("[^a-zA-Z0-9]");
+      std::string ent_name_alphanum = regex_replace(ent_name, e, "_",
+                                                    boost::match_default
+                                                    | boost::format_sed);
+      GraphFile << ent_name_alphanum
+		<<" [ label = \"" << ent_name << "\" ," << std::endl
 		<<"   fontcolor = black, color = black, fillcolor=cyan, style=filled, shape=box ]" << std::endl;
       ent->writeGraph(GraphFile);
     }
