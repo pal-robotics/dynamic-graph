@@ -15,14 +15,21 @@ LD_LIBRARY_PATH += /opt/openrobots/lib
 export LD_LIBRARY_PATH
 
 # FIXME: do not run test suite for now as robot model is missing.
-export DEB_BUILD_OPTIONS=nocheck
+# export DEB_BUILD_OPTIONS=nocheck
 
 override_dh_auto_configure:
 	dh_auto_configure -- -DCMAKE_BUILD_TYPE=RELEASE -DGENERATE_DOC=ON -DCMAKE_INSTALL_PREFIX=/opt/openrobots
 
 override_dh_shlibdeps:
-	LD_LIBRARY_PATH=/opt/openrobots/lib:/usr/lib/libfakeroot/:/usr/lib64/libfakeroot:/usr/lib32/libfakeroot dpkg-shlibdeps
-
+	LD_LIBRARY_PATH=/opt/openrobots/lib:/usr/lib/libfakeroot/:/usr/lib64/libfakeroot:/usr/lib32/libfakeroot \
+	dpkg-shlibdeps -Tdebian/libdynamic-graph1.2.1.substvars \
+	debian/libdynamic-graph1.2.1/opt/openrobots/bin/dg-shell \
+	debian/libdynamic-graph1.2.1/opt/openrobots/lib/plugin/shell-procedure.so \
+	debian/libdynamic-graph1.2.1/opt/openrobots/lib/plugin/tracer-real-time.so \
+	debian/libdynamic-graph1.2.1/opt/openrobots/lib/plugin/shell-functions.so \
+	debian/libdynamic-graph1.2.1/opt/openrobots/lib/plugin/contiifstream.so \
+	debian/libdynamic-graph1.2.1/opt/openrobots/lib/plugin/tracer.so \
+	debian/libdynamic-graph1.2.1/opt/openrobots/lib/libdynamic-graph.so.1.2.1
 
 %:
 	dh  $@
