@@ -13,14 +13,17 @@
 # received a copy of the GNU Lesser General Public License along with
 # dynamic-graph. If not, see <http://www.gnu.org/licenses/>.
 
-CMAKE_MINIMUM_REQUIRED(VERSION 2.6)
+CMAKE_MINIMUM_REQUIRED(VERSION 2.8.3)
 
-INCLUDE(cmake/base.cmake)
-INCLUDE(cmake/boost.cmake)
-INCLUDE(cmake/pthread.cmake)
-INCLUDE(cmake/cpack.cmake)
+find_package(catkin REQUIRED COMPONENTS sot_cmake jrl-mal)
 
-SET(PROJECT_NAME dynamic-graph)
+project(dynamic-graph)
+
+INCLUDE(${SOT_CMAKE_DIR}/base.cmake)
+INCLUDE(${SOT_CMAKE_DIR}/boost.cmake)
+INCLUDE(${SOT_CMAKE_DIR}/pthread.cmake)
+INCLUDE(${SOT_CMAKE_DIR}/cpack.cmake)
+
 SET(PROJECT_DESCRIPTION "Dynamic graph library")
 SET(PROJECT_URL "http://github.com/jrl-umi3218/dynamic-graph")
 
@@ -32,7 +35,7 @@ SET(LIBRARY_OUTPUT_PATH ${PROJECT_BINARY_DIR}/lib)
 SETUP_PROJECT()
 
 # Trigger dependency to jrl-mal
-ADD_REQUIRED_DEPENDENCY("jrl-mal >= 1.8.0")
+#ADD_REQUIRED_DEPENDENCY("jrl-mal >= 1.8.0")
 
 # Add configuration headers for plug-ins.
 GENERATE_CONFIGURATION_HEADER(
@@ -49,7 +52,7 @@ GENERATE_CONFIGURATION_HEADER(
 
 # FIXME: to be changed into lib/dynamic-graph
 # to avoid name collision when installing dynamic-graph in /usr.
-SET(PLUGINDIR "${CMAKE_INSTALL_FULL_LIBDIR}/plugin")
+SET(PLUGINDIR "${CATKIN_DEVEL_PREFIX}/lib")
 
 # Add extra keys to pkg-config file to export the location of the
 # plug-in directory in a robust manner.
@@ -64,9 +67,11 @@ SEARCH_FOR_PTHREAD()
 
 ADD_SUBDIRECTORY(src)
 ADD_SUBDIRECTORY(include)
-ADD_SUBDIRECTORY(doc)
-ADD_SUBDIRECTORY(tests)
+#ADD_SUBDIRECTORY(doc)
+#ADD_SUBDIRECTORY(tests)
 ADD_SUBDIRECTORY(share)
+
+catkin_package(INCLUDE_DIRS include CFG_EXTRAS dynamic-graph-extras.cmake)
 
 SETUP_PROJECT_FINALIZE()
 SETUP_PROJECT_CPACK()
