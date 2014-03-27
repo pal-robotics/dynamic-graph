@@ -24,6 +24,8 @@ INCLUDE(${SOT_CMAKE_DIR}/boost.cmake)
 INCLUDE(${SOT_CMAKE_DIR}/pthread.cmake)
 INCLUDE(${SOT_CMAKE_DIR}/cpack.cmake)
 
+include_directories(${catkin_INCLUDE_DIRS})
+
 SET(PROJECT_DESCRIPTION "Dynamic graph library")
 SET(PROJECT_URL "http://github.com/jrl-umi3218/dynamic-graph")
 
@@ -71,7 +73,11 @@ ADD_SUBDIRECTORY(include)
 #ADD_SUBDIRECTORY(tests)
 ADD_SUBDIRECTORY(share)
 
-catkin_package(INCLUDE_DIRS include CFG_EXTRAS dynamic-graph-extras.cmake)
+catkin_package(
+  INCLUDE_DIRS include
+  CFG_EXTRAS dynamic-graph-extras.cmake
+  CATKIN_DEPENDS jrl-mal
+)
 
 SETUP_PROJECT_FINALIZE()
 SETUP_PROJECT_CPACK()
