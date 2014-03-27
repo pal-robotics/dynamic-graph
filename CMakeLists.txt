@@ -54,7 +54,7 @@ GENERATE_CONFIGURATION_HEADER(
 
 # FIXME: to be changed into lib/dynamic-graph
 # to avoid name collision when installing dynamic-graph in /usr.
-SET(PLUGINDIR "${CATKIN_DEVEL_PREFIX}/lib")
+SET(PLUGINDIR "lib/dynamic-graph")
 
 # Add extra keys to pkg-config file to export the location of the
 # plug-in directory in a robust manner.
