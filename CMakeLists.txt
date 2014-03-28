@@ -67,17 +67,18 @@ PKG_CONFIG_APPEND_LIBS("dynamic-graph")
 SEARCH_FOR_BOOST()
 SEARCH_FOR_PTHREAD()
 
+catkin_package(
+  INCLUDE_DIRS include
+  LIBRARIES ${PROJECT_NAME} tracer tracer-real-time
+  CFG_EXTRAS dynamic-graph-extras.cmake
+  CATKIN_DEPENDS jrl-mal
+)
+
 ADD_SUBDIRECTORY(src)
 ADD_SUBDIRECTORY(include)
 #ADD_SUBDIRECTORY(doc)
 #ADD_SUBDIRECTORY(tests)
 ADD_SUBDIRECTORY(share)
-
-catkin_package(
-  INCLUDE_DIRS include
-  CFG_EXTRAS dynamic-graph-extras.cmake
-  CATKIN_DEPENDS jrl-mal
-)
 
 SETUP_PROJECT_FINALIZE()
 SETUP_PROJECT_CPACK()
