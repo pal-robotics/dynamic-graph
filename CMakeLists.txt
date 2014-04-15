@@ -15,16 +15,14 @@
 
 CMAKE_MINIMUM_REQUIRED(VERSION 2.8.3)
 
-find_package(catkin REQUIRED COMPONENTS sot_cmake jrl-mal)
-
 project(dynamic-graph)
+
+find_package(catkin REQUIRED COMPONENTS sot_cmake jrl-mal)
 
 INCLUDE(${SOT_CMAKE_DIR}/base.cmake)
 INCLUDE(${SOT_CMAKE_DIR}/boost.cmake)
 INCLUDE(${SOT_CMAKE_DIR}/pthread.cmake)
 INCLUDE(${SOT_CMAKE_DIR}/cpack.cmake)
-
-include_directories(${catkin_INCLUDE_DIRS})
 
 SET(PROJECT_DESCRIPTION "Dynamic graph library")
 SET(PROJECT_URL "http://github.com/jrl-umi3218/dynamic-graph")
@@ -74,11 +72,12 @@ catkin_package(
   CATKIN_DEPENDS jrl-mal
 )
 
+include_directories(include ${catkin_INCLUDE_DIRS})
+
+
 ADD_SUBDIRECTORY(src)
 ADD_SUBDIRECTORY(include)
 #ADD_SUBDIRECTORY(doc)
 #ADD_SUBDIRECTORY(tests)
 ADD_SUBDIRECTORY(share)
 
-SETUP_PROJECT_FINALIZE()
-SETUP_PROJECT_CPACK()
