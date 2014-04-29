@@ -16,6 +16,7 @@
 ####################################
 ### Main Library
 ####################################
+
 SET(LIBRARY_NAME ${PROJECT_NAME})
 
 # Verbosity level

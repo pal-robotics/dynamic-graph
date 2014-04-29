@@ -16,6 +16,8 @@
 # Add default import directories.
 #  It is used by the import directive of the sot shell to locate
 #  scripts and plug-ins.
+
+
 SET(
   DG_IMPORT_DEFAULT_PATHS
   "${CMAKE_INSTALL_PREFIX}/share/dynamic-graph/script:${CMAKE_INSTALL_PREFIX}/${PLUGINDIR}"
