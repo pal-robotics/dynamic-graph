@@ -18,9 +18,8 @@ CMAKE_MINIMUM_REQUIRED(VERSION 2.8.3)
 project(dynamic-graph)
 
 # suppress gcc check warnings
-string(REPLACE "-Woverloaded-virtual" "" CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS})
-string(REPLACE "-Werror=overloaded-virtual" "" CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS})
-
+string(REPLACE "-Woverloaded-virtual" "" CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
+string(REPLACE "-Werror=overloaded-virtual" "" CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
 find_package(catkin REQUIRED COMPONENTS sot_cmake jrl-mal)
 
 INCLUDE(${SOT_CMAKE_DIR}/base.cmake)
