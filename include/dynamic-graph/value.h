@@ -93,9 +93,9 @@ namespace dynamicgraph {
       static std::string typeName(Type type);
 
       /// Output in a stream
-      DYNAMIC_GRAPH_DLLEXPORT friend std::ostream& operator<<(std::ostream& os, const Value& value);
+      friend DYNAMIC_GRAPH_DLLEXPORT std::ostream& operator<<(std::ostream& os, const Value& value);
     public:
-      DYNAMIC_GRAPH_DLLEXPORT friend class EitherType;
+      friend DYNAMIC_GRAPH_DLLEXPORT class EitherType;
       bool boolValue() const;
       unsigned unsignedValue() const;
       int intValue() const;
